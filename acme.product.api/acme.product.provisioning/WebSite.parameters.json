@@ -7,6 +7,12 @@
     },
     "region": {
       "value": "EUN"
-    }
+    },
+    "storageaccountType": {
+      "value": ""
+    },
+    "env": {
+      "value": ""
+    } 
   }
 }

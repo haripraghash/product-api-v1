@@ -182,7 +182,7 @@
   },
   "variables": {
     "webSiteName": "[concat('webSite', uniqueString(resourceGroup().id))]",
-    "storageaccountName": "[concat('acmepdt', uniqueString(resourceGroup().id))]",
+    "storageaccountName": "[concat('acmepdt', parameters('region'), parameters('env'),'stor')]",
     "UIAppName": "[concat('UIApp', uniqueString(resourceGroup().id))]",
     "offerType": "Standard"
   },
