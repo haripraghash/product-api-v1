@@ -198,7 +198,8 @@
     "webSiteName": "[concat('webSite', uniqueString(resourceGroup().id))]",
     "storageaccountName": "[concat('acmepdt', parameters('region'), parameters('env'),'stor')]",
     "UIAppName": "[concat('UIApp', uniqueString(resourceGroup().id))]",
-    "offerType": "Standard"
+    "offerType": "Standard",
+    "databaseAccountName":  "[concat('acmepdt', parameters('region'), parameters('env'), 'cosmos']" 
   },
   "resources": [
     //{
@@ -681,7 +682,7 @@
         "displayName": "storageaccount"
       },
       "kind": "Storage"
-    }
+    },
     //{
     //  "name": "[parameters('UIHostingPlanName')]",
     //  "type": "Microsoft.Web/serverfarms",
@@ -716,35 +717,35 @@
     //    "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('UIHostingPlanName'))]"
     //  }
     //},
-    //{
-    //  "apiVersion": "2015-04-08",
-    //  "type": "Microsoft.DocumentDB/databaseAccounts",
-    //  "kind": "[if(equals(parameters('apiType'), 'MongoDB'), 'MongoDB', 'GlobalDocumentDB')]",
-    //  "name": "[parameters('databaseAccountName')]",
-    //  "location": "[parameters('location')]",
-    //  "properties": {
-    //    "name": "[parameters('databaseAccountName')]",
-    //    "databaseAccountOfferType": "[variables('offerType')]",
-    //    "locations": [
-    //      {
-    //        "locationName": "[parameters('location')]",
-    //        "failoverPriority": 0
-    //      },
-    //      {
-    //        "locationName": "[parameters('location')]",
-    //        "failoverPriority": 1
-    //      }
-    //    ],
-    //    "capabilities": [
-    //      {
-    //        "name": "[if(equals(parameters('apiType'), 'Cassandra'), 'EnableCassandra', if(equals(parameters('apiType'), 'Gremlin'), 'EnableGremlin', if(equals(parameters('apiType'), 'MongoDB'), '', if(equals(parameters('apiType'), 'SQL'), '', if(equals(parameters('apiType'), 'Table'), 'EnableTable', '')))))]"
-    //      }
-    //    ]
-    //  },
-    //  "tags": {
-    //    "defaultExperience": "[if(equals(parameters('apiType'), 'Cassandra'), 'Cassandra', if(equals(parameters('apiType'), 'Gremlin'), 'Graph', if(equals(parameters('apiType'), 'MongoDB'), 'MongoDB', if(equals(parameters('apiType'), 'SQL'), 'DocumentDB', if(equals(parameters('apiType'), 'Table'), 'Table', '')))))]"
-    //  }
-    //},
+    {
+      "apiVersion": "2015-04-08",
+      "type": "Microsoft.DocumentDB/databaseAccounts",
+      "kind": "MongoDB",
+      "name": "[variables('databaseAccountName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "name": "[parameters('databaseAccountName')]",
+        "databaseAccountOfferType": "[variables('offerType')]",
+        "locations": [
+          {
+            "locationName": "[parameters('location')]",
+            "failoverPriority": 0
+          },
+          {
+            "locationName": "[parameters('location')]",
+            "failoverPriority": 1
+          }
+        ],
+        "capabilities": [
+          {
+            "name": ""
+          }
+        ]
+      },
+      "tags": {
+        "defaultExperience": "MongoDB"
+      }
+    }
     //{
     //  "apiVersion": "2015-11-01",
     //  "type": "Microsoft.Network/trafficManagerProfiles",
