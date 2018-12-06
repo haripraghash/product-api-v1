@@ -104,6 +104,20 @@
         "description": "Tenant Id of the subscription. Get using Get-AzureRmSubscription cmdlet or Get Subscription API"
       }
     },
+    "region": {
+      "type": "string",
+      "defaultValue": "eun",
+      "metadata": {
+        "description": "Abbreviation of azure region. For ex - eun(North Europe)"
+      }
+    },
+    "env": {
+      "type": "string",
+      "defaultValue": "feat",
+      "metadata": {
+        "description": "Th deployment environments. feat,dev,test,staging,perf,prod"
+      }
+    },
     "objectId": {
       "type": "string",
       "metadata": {
