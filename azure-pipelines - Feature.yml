@@ -30,3 +30,13 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: CopyFiles@2
+  displayName: 'Copy provisioning templates and application binaries to $(build.artifactStagingDirectory)'
+  inputs:
+    TargetFolder: '$(build.artifactStagingDirectory)'
+
+- task: PublishArtifacts@1
+  displayName: 'Publish artifacts'
+  inputs:
+    PathToPublish: '$(build.artifactStagingDirectory)'
