@@ -13,7 +13,7 @@
         "Premium_LRS"
       ]
     },
-    
+
     "tenantId": {
       "type": "string",
       "defaultValue": "[subscription().tenantId]",
@@ -350,7 +350,7 @@
         "applicationId": "[variables('apiWebSiteName')]"
       }
     },
-    
+
     {
       "name": "[variables('storageaccountName')]",
       "type": "Microsoft.Storage/storageAccounts",
@@ -499,5 +499,11 @@
     //    ]
     //  }
     //},
-  ]
+  ],
+  "outputs": {
+    "apiAppName": {
+      "value": "[variables('apiWebSiteName')]",
+      "type": "string"
+    }
+  }
 }
