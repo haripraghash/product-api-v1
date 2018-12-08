@@ -6,13 +6,19 @@
     //  "value": null
     //},
     "region": {
-      "value": "EUN"
+      "value": "eun"
     },
     "storageaccountType": {
-      "value": ""
+      "value": "Standard_LRS"
     },
     "env": {
-      "value": ""
+      "value": "feat"
+    },
+    "tenantId": {
+      "value": "aa2bb2c7-7968-454a-b359-ab562956de2c"
+    },
+    "objectId": {
+      "value": "a2274562-16ff-44b4-b1bf-691954f2d1f7"
     } 
   }
 }
