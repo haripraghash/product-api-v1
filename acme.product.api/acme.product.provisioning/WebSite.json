@@ -504,6 +504,14 @@
     "apiAppName": {
       "value": "[variables('apiWebSiteName')]",
       "type": "string"
+    },
+    "apiappinsightskey": {
+      "value": "[reference(resourceId('Microsoft.Insights/components', variables('apiappinsights')), '2014-04-01').InstrumentationKey]",
+      "type": "string"
+    },
+    "apiappinsightskeyappid": {
+      "value": "[reference(resourceId('Microsoft.Insights/components', variables('apiappinsights')), '2014-04-01').AppId]",
+      "type": "string"
     }
   }
 }
