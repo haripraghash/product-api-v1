@@ -509,8 +509,12 @@
       "value": "[reference(resourceId('Microsoft.Insights/components', variables('apiappinsights')), '2014-04-01').InstrumentationKey]",
       "type": "string"
     },
-    "apiappinsightskeyappid": {
-      "value": "[reference(resourceId('Microsoft.Insights/components', variables('apiappinsights')), '2014-04-01').AppId]",
+    "apiappinsights": {
+      "value": "[variables('apiappinsights')]",
+      "type": "string"
+    },
+    "keyvaultname": {
+      "value": "[variables('keyVaultName')]",
       "type": "string"
     }
   }
