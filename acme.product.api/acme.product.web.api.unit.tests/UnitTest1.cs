@@ -9,6 +9,7 @@ namespace acme.product.web.api.unit.tests
         [TestMethod]
         public void TestMethod1()
         {
+            Assert.IsTrue(true);
         }
     }
 }

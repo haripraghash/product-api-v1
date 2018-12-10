@@ -71,7 +71,8 @@
     "keyVaultName": "[concat('acmepdt', parameters('region'), parameters('env'), 'keyvault')]",
     "apiappinsights": "[concat('acmepdt', parameters('region'), parameters('env'), 'appinsights')]",
     "apiHostingPlanName": "[concat('acmepdt', parameters('region'), parameters('env'), 'api-service-plan')]",
-    "identityResourceId": "[concat(resourceId('Microsoft.Web/sites', variables('apiWebSiteName')),'/providers/Microsoft.ManagedIdentity/Identities/default')]"
+    "identityResourceId": "[concat(resourceId('Microsoft.Web/sites', variables('apiWebSiteName')),'/providers/Microsoft.ManagedIdentity/Identities/default')]",
+    "stagingSlotName": "[concat(variables('apiWebSiteName'), '/','staging')]"
   },
   "resources": [
     {
@@ -115,6 +116,22 @@
       },
       "resources": [
         {
+          "name": "slotConfigNames",
+          "type": "config",
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "[concat('Microsoft.Web/sites/', variables('apiWebSiteName'))]"
+          ],
+          "tags": {
+            "displayName": "slotConfigNames"
+          },
+          "properties": {
+            "appSettingNames": [
+              "APPINSIGHTS_INSTRUMENTATIONKEY"
+            ]
+          }
+        },
+        {
           "name": "appsettings",
           "type": "config",
           "apiVersion": "2015-08-01",
@@ -129,24 +146,45 @@
             "APPINSIGHTS_INSTRUMENTATIONKEY": "[reference(resourceId('Microsoft.Insights/components', variables('apiappinsights')), '2014-04-01').InstrumentationKey]",
             "key2": "value2"
           }
+        },
+        {
+          "apiVersion": "2016-08-01",
+          "type": "slots",
+          "name": "staging",
+          "location": "[resourceGroup().location]",
+          "comments": "This specifies the web app slots.",
+          "tags": {
+            "displayName": "WebAppSlots"
+          },
+          "properties": {
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('apiHostingPlanName'))]"
+          },
+          "identity": {
+            "type": "SystemAssigned"
+          },
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites', variables('apiWebSiteName'))]"
+          ],
+          "resources": [
+            {
+              "name": "appsettings",
+              "type": "config",
+              "apiVersion": "2015-08-01",
+              "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', variables('apiWebSiteName'))]",
+                "[resourceId('Microsoft.Insights/components', variables('apiappinsights'))]",
+                "[resourceId('Microsoft.Web/sites/slots', variables('apiWebSiteName'), 'staging')]"
+              ],
+              "tags": {
+                "displayName": "app-settings"
+              },
+              "properties": {
+                "APPINSIGHTS_INSTRUMENTATIONKEY": "[reference(resourceId('Microsoft.Insights/components', variables('apiappinsights')), '2014-04-01').InstrumentationKey]",
+                "key2": "value2"
+              }
+            }
+          ]
         }
-      ]
-    },
-    {
-      "apiVersion": "2016-08-01",
-      "type": "Microsoft.Web/sites/slots",
-      "name": "staging",
-      "kind": "app",
-      "location": "[resourceGroup().location]",
-      "comments": "This specifies the web app slots.",
-      "tags": {
-        "displayName": "WebAppSlots"
-      },
-      "properties": {
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('apiHostingPlanName'))]"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/Sites', variables('apiWebSiteName'))]"
       ]
     },
     {
