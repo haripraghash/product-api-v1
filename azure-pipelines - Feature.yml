@@ -31,8 +31,13 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: '**/acme.product.web.api.unit.tests.dll!**\*TestAdapter.dll!**\obj\**'
+    testAssemblyVer2: |
+     **\*acme.product.web.api.unit.tests.dll
+     !**\*Performance*\**
+     !**\*TestAdapter.dll
+     !**\obj\**
+    runInParallel: true
+    codeCoverageEnabled: true
 
 - task: CopyFiles@2
   displayName: 'Copy provisioning templates and application binaries to $(build.artifactStagingDirectory)'
