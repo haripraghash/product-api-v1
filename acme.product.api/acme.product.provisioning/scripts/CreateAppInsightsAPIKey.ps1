@@ -57,6 +57,8 @@ Write-Host "##vso[task.setvariable variable=$AppInsightsApiKeyPipelineVariable]$
 }
 else{
 Write-Host "Secret $AppInsightsApiKeySecretName is available in $KeyVaultName"
+$AppInsightsApiKeyPersistedSecret = Get-AzureKeyVaultSecret -VaultName $KeyVaultName -Name $AppInsightsApiKeySecretName
+
 Write-Host "##vso[task.setvariable variable=$AppInsightsApiKeyPipelineVariable]$AppInsightsApiKeyPersistedSecret.SecretValueText"
 }
 

@@ -506,7 +506,7 @@
       "type": "string"
     },
     "apiappinsightsAppId": {
-      "value": "[reference(resourceId('Microsoft.Insights/components', variables('apiappinsights')), '2014-04-01').ApplicationId]",
+      "value": "[reference(resourceId('Microsoft.Insights/components', variables('apiappinsights')), '2014-04-01').AppId]",
       "type": "string"
     },
     "apiappinsights": {
