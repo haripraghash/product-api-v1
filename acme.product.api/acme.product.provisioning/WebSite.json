@@ -133,6 +133,23 @@
       ]
     },
     {
+      "apiVersion": "2016-08-01",
+      "type": "Microsoft.Web/sites/slots",
+      "name": "staging",
+      "kind": "app",
+      "location": "[resourceGroup().location]",
+      "comments": "This specifies the web app slots.",
+      "tags": {
+        "displayName": "WebAppSlots"
+      },
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('apiHostingPlanName'))]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/Sites', variables('apiWebSiteName'))]"
+      ]
+    },
+    {
       "apiVersion": "2014-04-01",
       "name": "[concat(variables('apiHostingPlanName'), '-', 'auto-scale-settings')]",
       "type": "Microsoft.Insights/autoscalesettings",
