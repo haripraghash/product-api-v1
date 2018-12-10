@@ -41,7 +41,7 @@ if(!$keyVault)
 	Write-Error "Key vault $KeyVaultName does not exist"
 }
 
-$AppInsightsApiKeyPersistedSecret = Get-AzureKeyVaultSecret -VaultName $KeyVaultName -Name $AppInsightsApiKeySecretName
+$AppInsightsApiKeyPersistedSecret = (Get-AzureKeyVaultSecret -VaultName $KeyVaultName -Name $AppInsightsApiKeySecretName).SecretValueText
 
 
 if(!$AppInsightsApiKeyPersistedSecret)
@@ -51,15 +51,14 @@ Remove-AzureRmApplicationInsightsApiKey -ResourceGroupName $ResourceGroupName -N
 $appInsightsApiKey = Create-AppInsightsApiKey
 Write-Host "Storing App insights api key in key vault $KeyVaultName with secret name  $AppInsightsApiKeySecretName"
 $appInsightsApiKeySecret = ConvertTo-SecureString -String $appInsightsApiKey.ApiKey -AsPlainText -Force
-$AppInsightsApiKeyPersistedSecret = Set-AzureKeyVaultSecret -VaultName $KeyVaultName -Name $AppInsightsApiKeySecretName -SecretValue $appInsightsApiKeySecret
+Set-AzureKeyVaultSecret -VaultName $KeyVaultName -Name $AppInsightsApiKeySecretName -SecretValue $appInsightsApiKeySecret
+$AppInsightsApiKeyPersistedSecret = (Get-AzureKeyVaultSecret -VaultName $KeyVaultName -Name $AppInsightsApiKeySecretName).SecretValueText
 Write-Host "Persisted App insights api key in key vault $KeyVaultName with secret name  $AppInsightsApiKeySecretName"
-Write-Host "##vso[task.setvariable variable=$AppInsightsApiKeyPipelineVariable]$AppInsightsApiKeyPersistedSecret.SecretValueText"
+Write-Host "##vso[task.setvariable variable=$AppInsightsApiKeyPipelineVariable]$AppInsightsApiKeyPersistedSecret"
 }
 else{
 Write-Host "Secret $AppInsightsApiKeySecretName is available in $KeyVaultName"
-$AppInsightsApiKeyPersistedSecret = Get-AzureKeyVaultSecret -VaultName $KeyVaultName -Name $AppInsightsApiKeySecretName
-
-Write-Host "##vso[task.setvariable variable=$AppInsightsApiKeyPipelineVariable]$AppInsightsApiKeyPersistedSecret.SecretValueText"
+Write-Host "##vso[task.setvariable variable=$AppInsightsApiKeyPipelineVariable]$AppInsightsApiKeyPersistedSecret"
 }
 
 
