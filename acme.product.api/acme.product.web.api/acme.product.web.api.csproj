@@ -301,6 +301,24 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\acme.product.models\acme.product.models.csproj">
+      <Project>{22c1adda-07bc-42da-8f76-affd6904c587}</Project>
+      <Name>acme.product.models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\acme.product.repositories.implementation\acme.product.repositories.implementation.csproj">
+      <Project>{8e73e91a-dafb-4bd1-b2e4-92d1ae8e8835}</Project>
+      <Name>acme.product.repositories.implementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\acme.product.repositories.interfaces\acme.product.repositories.interfaces.csproj">
+      <Project>{c9e4e2bc-a801-4873-a89e-c793ee11d83f}</Project>
+      <Name>acme.product.repositories.interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\acme.product.services\acme.product.services.csproj">
+      <Project>{797a912a-8a29-4849-868c-6ea908d8db47}</Project>
+      <Name>acme.product.services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
