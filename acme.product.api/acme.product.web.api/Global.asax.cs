@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Castle.Windsor;
+using Castle.Windsor.Installer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +20,11 @@ namespace acme.product.web.api
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var container = new WindsorContainer();
+            container.Install(FromAssembly.This());
+            GlobalConfiguration.Configuration.DependencyResolver = new acme.product.web.api.IOC.DependencyResolver(container.Kernel);
+
         }
     }
 }

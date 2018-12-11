@@ -195,6 +195,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IOC\DependencyResolver.cs" />
+    <Compile Include="IOC\DependencyScope.cs" />
+    <Compile Include="IOC\WebApiInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -302,6 +305,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\acme.product.api.common\acme.product.api.common.csproj">
+      <Project>{28c510ee-5350-41ed-80ef-01df39fc3ade}</Project>
+      <Name>acme.product.api.common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\acme.product.models\acme.product.models.csproj">
       <Project>{22c1adda-07bc-42da-8f76-affd6904c587}</Project>
       <Name>acme.product.models</Name>

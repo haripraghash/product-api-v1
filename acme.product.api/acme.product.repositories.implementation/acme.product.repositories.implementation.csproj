@@ -74,10 +74,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="IProductDatabaseInitializer.cs" />
+    <Compile Include="ProductDatabaseInitializer.cs" />
+    <Compile Include="ProductsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\acme.product.api.common\acme.product.api.common.csproj">
+      <Project>{28c510ee-5350-41ed-80ef-01df39fc3ade}</Project>
+      <Name>acme.product.api.common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\acme.product.models\acme.product.models.csproj">
       <Project>{22c1adda-07bc-42da-8f76-affd6904c587}</Project>
       <Name>acme.product.models</Name>

@@ -9,12 +9,12 @@ namespace acme.product.repositories.interfaces
 {
     public interface IProductsRepository
     {
-        IEnumerable<Product> GetAll();
+        IEnumerable<Product> GetAllAsync();
 
-        Product GetById(string productId);
+        Product GetByIdAsync(string productId);
 
-        Product Update(Product product);
+        Product UpdateAsync(Product product);
 
-        Product Delete(Product product);
+        Task DeleteAsync(string productId);
     }
 }
